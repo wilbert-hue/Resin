@@ -1472,9 +1472,9 @@ export async function processJsonDataAsync(
     
     // Build metadata
     const metadata: Metadata = {
-      market_name: 'Normothermic Machine Perfusion Market',
+      market_name: ' & Mexico Resin Compounds Market',
       market_type: 'Market Analysis',
-      industry: 'Healthcare & Pharmaceuticals',
+      industry: 'Plastics & Polymers',
       years: allYears,
       start_year: startYear,
       base_year: baseYear,
@@ -1483,7 +1483,7 @@ export async function processJsonDataAsync(
       forecast_years: allYears.filter(y => y > historicalEndYear),
       currency: 'USD',
       value_unit: 'Million',
-      volume_unit: 'Million Units',
+      volume_unit: 'Tons',
       has_value: valueRecords.length > 0,
       has_volume: volumeRecords.length > 0,
     }

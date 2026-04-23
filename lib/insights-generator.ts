@@ -23,7 +23,7 @@ export function generateInsights(
   records: DataRecord[],
   filters: FilterState,
   currency: 'USD' | 'INR' = 'USD',
-  volumeUnit: string = 'Million Units'
+  volumeUnit: string = 'Tons'
 ): Insight[] {
   const insights: Insight[] = []
   
@@ -59,7 +59,7 @@ export function generateInsights(
 /**
  * Find the top performing geography or segment
  */
-function findTopPerformer(records: DataRecord[], filters: FilterState, currency: 'USD' | 'INR' = 'USD', volumeUnit: string = 'Million Units'): Insight | null {
+function findTopPerformer(records: DataRecord[], filters: FilterState, currency: 'USD' | 'INR' = 'USD', volumeUnit: string = 'Tons'): Insight | null {
   const [startYear, endYear] = filters.yearRange
   const currentYear = endYear
   
@@ -86,7 +86,7 @@ function findTopPerformer(records: DataRecord[], filters: FilterState, currency:
   if (!topKey) return null
   
   // Format value based on currency
-  // Values are already in the unit from metadata (e.g., Million), so no conversion needed
+  // Values are already in the unit from metadata (e.g., Tons), so no conversion needed
   let valueDisplay = ''
   if (filters.dataType === 'value') {
     if (currency === 'INR') {
