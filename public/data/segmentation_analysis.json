@@ -1,62 +1,76 @@
 {
   "Global": {
-    "By Type": {
-      "Sub-Normothermic Perfusion (20–34°C)": {},
-      "Warm or Normothermic Perfusion (35–37°C)": {}
-    },
-    "By Organ Type": {
-      "Liver": {},
-      "Heart": {},
-      "Lung": {},
-      "Kidney": {},
-      "Others (Pancreas, Small bowel / Intestine, Composite Tissues / Limb Perfusion (emerging use cases))": {}
-    },
-    "Application / Use Case": {
-      "Organ Preservation": {},
-      "Viability Assessment": {},
-      "Physiologic Transport": {},
-      "Reconditioning Marginal Organs": {},
-      "Others (Research Use / Protocol development)": {}
-    },
-    "By End User": {
-      "Hospitals & Clinics": {},
-      "Specialty Clinic/Centers": {},
-      "Transplant Centers": {},
-      "Others (Research Institutes/Centers, Organ Procurement Organizations, etc.)": {}
-    },
     "By Region": {
-      "North America": {
-        "U.S.": {},
-        "Canada": {}
+      "U.S.": {
+        "Northeast": {},
+        "Midwest": {},
+        "South": {},
+        "West": {},
+        "Southeast": {}
       },
-      "Europe": {
-        "U.K.": {},
-        "Germany": {},
-        "Italy": {},
-        "France": {},
-        "Spain": {},
-        "Russia": {},
-        "Rest of Europe": {}
+      "Mexico": {
+        "Northern Mexico": {},
+        "Central Mexico": {},
+        "Western Mexico": {},
+        "Southern Mexico": {},
+        "Southeast Mexico": {}
+      }
+    },
+    "By Resin/Thermoplastic Compound Types": {
+      "Polyethylene (PE)": {},
+      "Polypropylene (PP)": {},
+      "Polyvinyl Chloride (PVC)": {},
+      "Polyethylene Terephthalate (PET)": {},
+      "Acrylonitrile Butadiene Styrene (ABS)": {},
+      "Polyamide (PA)": {},
+      "Polyphenylene Sulfide (PPS)": {},
+      "Polyoxymethylene (POM)": {},
+      "Polyether Ether Ketone (PEEK)": {},
+      "Polybutylene Terephthalate (PBT)": {},
+      "Polycarbonate (PC)": {},
+      "Polycarbonate-ABS (PC-ABS)": {},
+      "Other Engineered Compounds": {}
+    },
+    "By Form": {
+      "Liquid": {},
+      "Solid": {}
+    },
+    "By Technology": {
+      "Injection Molding": {},
+      "Blow Molding": {},
+      "Extrusion": {},
+      "Compression Molding": {},
+      "Rotational Molding": {},
+      "Thermoforming": {},
+      "3D Printing": {},
+      "Foam Molding": {},
+      "Others": {}
+    },
+    "End-Use Industries": {
+      "Packaging": {
+        "Flexible Packaging": {},
+        "Rigid Packaging": {},
+        "Food & Beverage Packaging": {},
+        "Others (Industrial Packaging, etc.)": {}
       },
-      "Asia Pacific": {
-        "China": {},
-        "India": {},
-        "Japan": {},
-        "South Korea": {},
-        "ASEAN": {},
-        "Australia": {},
-        "Rest of Asia Pacific": {}
+      "Automotive": {
+        "Exterior Components": {},
+        "Interior Components": {},
+        "Others (Under-the-Hood Components, etc.)": {}
       },
-      "Latin America": {
-        "Brazil": {},
-        "Argentina": {},
-        "Mexico": {},
-        "Rest of Latin America": {}
+      "Construction": {
+        "Building Materials": {},
+        "Flooring and Roofing": {},
+        "Others (Window Profiles and Doors, etc.)": {}
       },
-      "Middle East & Africa": {
-        "GCC": {},
-        "South Africa": {},
-        "Rest of Middle East & Africa": {}
+      "Electronics": {
+        "Consumer Electronics": {},
+        "Automotive Electronics": {},
+        "Others (Industrial Electronics, etc.)": {}
+      },
+      "Consumer Goods": {
+        "Household Appliances": {},
+        "Toys and Sporting Goods": {}
       }
     }
   }
