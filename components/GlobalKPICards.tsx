@@ -146,14 +146,19 @@ export function GlobalKPICards() {
     const actualSelectedGeographies = filters.geographies.length > 0 ? filters.geographies : []
     const dataTypeLabel = filters.dataType === 'value' ? 'Market Size' : 'Market Volume'
 
-    // Get market name from metadata, fallback to "Global Market"
-    const marketName = data.metadata.market_name || 'Global Market'
+    // Market title (geography-agnostic); geography scope is prepended separately
+    const marketName = (data.metadata.market_name || 'Resin Compounds Market').trim()
 
-    const geographyLabel = actualSelectedGeographies.length === 0
-      ? `Global ${marketName}`
-      : actualSelectedGeographies.length === 1
-      ? `${actualSelectedGeographies[0]} ${marketName}`
-      : `${actualSelectedGeographies.length} Geographies ${marketName}`
+    const geoForTitle =
+      actualSelectedGeographies.length > 0
+        ? actualSelectedGeographies.length === 1
+          ? actualSelectedGeographies[0]
+          : actualSelectedGeographies.join(' & ')
+        : allGeographies.length > 0
+          ? allGeographies.join(' & ')
+          : 'All markets'
+
+    const geographyLabel = `${geoForTitle} ${marketName}`.replace(/\s+/g, ' ').trim()
     const segmentTypeLabel = targetSegmentType || 'All Segments'
 
     return {

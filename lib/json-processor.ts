@@ -1472,7 +1472,7 @@ export async function processJsonDataAsync(
     
     // Build metadata
     const metadata: Metadata = {
-      market_name: ' & Mexico Resin Compounds Market',
+      market_name: 'Resin Compounds Market',
       market_type: 'Market Analysis',
       industry: 'Plastics & Polymers',
       years: allYears,
