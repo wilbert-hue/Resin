@@ -1,5 +1,5 @@
 /**
- * Synthetic resin / thermoplastics market data for U.S. and Mexico sub-regions.
+ * Synthetic resin / thermoplastics market data for U.S. and Mexico (country level only, no sub-regions).
  * Produces: public/data/value.json, public/data/volume.json, public/data/segmentation_analysis.json
  */
 const fs = require('fs');
@@ -12,28 +12,12 @@ const ST_FORM = 'By Form';
 const ST_TECH = 'By Technology';
 const ST_END = 'End-Use Industries';
 
-const US_SUB = ['Northeast', 'Midwest', 'South', 'West', 'Southeast'];
-const MX_SUB = [
-  'Northern Mexico',
-  'Central Mexico',
-  'Western Mexico',
-  'Southern Mexico',
-  'Southeast Mexico',
-];
-const ALL_GEO = [...US_SUB, ...MX_SUB];
+const ALL_GEO = ['U.S.', 'Mexico'];
 
-// Relative size of each sub-region (normalized before use)
+// Country-level market weights (normalized)
 const geoWeights = {
-  Northeast: 0.12,
-  Midwest: 0.1,
-  South: 0.14,
-  West: 0.11,
-  Southeast: 0.13,
-  'Northern Mexico': 0.05,
-  'Central Mexico': 0.08,
-  'Western Mexico': 0.04,
-  'Southern Mexico': 0.05,
-  'Southeast Mexico': 0.04,
+  'U.S.': 0.65,
+  Mexico: 0.35,
 };
 const wSum = Object.values(geoWeights).reduce((a, b) => a + b, 0);
 for (const k of Object.keys(geoWeights)) geoWeights[k] /= wSum;
@@ -68,32 +52,13 @@ const technologies = {
   Others: 0.08,
 };
 
-const endUse = {
-  Packaging: {
-    'Flexible Packaging': 0.28,
-    'Rigid Packaging': 0.25,
-    'Food & Beverage Packaging': 0.3,
-    'Others (Industrial Packaging, etc.)': 0.17,
-  },
-  Automotive: {
-    'Exterior Components': 0.35,
-    'Interior Components': 0.4,
-    'Others (Under-the-Hood Components, etc.)': 0.25,
-  },
-  Construction: {
-    'Building Materials': 0.38,
-    'Flooring and Roofing': 0.32,
-    'Others (Window Profiles and Doors, etc.)': 0.3,
-  },
-  Electronics: {
-    'Consumer Electronics': 0.42,
-    'Automotive Electronics': 0.33,
-    'Others (Industrial Electronics, etc.)': 0.25,
-  },
-  'Consumer Goods': {
-    'Household Appliances': 0.55,
-    'Toys and Sporting Goods': 0.45,
-  },
+// End-Use Industries: main categories only (no sub-segments in data or UI)
+const endUseMain = {
+  Packaging: 0.22,
+  Automotive: 0.24,
+  Construction: 0.18,
+  Electronics: 0.2,
+  'Consumer Goods': 0.16,
 };
 
 // CAGR-style multipliers per line (scaled relative to base regional growth)
@@ -135,24 +100,6 @@ const growthMult = {
   },
 };
 
-const endUseLeafMult = {
-  'Flexible Packaging': 0.99,
-  'Rigid Packaging': 1.0,
-  'Food & Beverage Packaging': 1.01,
-  'Others (Industrial Packaging, etc.)': 1.05,
-  'Exterior Components': 1.0,
-  'Interior Components': 1.01,
-  'Others (Under-the-Hood Components, etc.)': 1.06,
-  'Building Materials': 0.99,
-  'Flooring and Roofing': 0.98,
-  'Others (Window Profiles and Doors, etc.)': 1.0,
-  'Consumer Electronics': 1.1,
-  'Automotive Electronics': 1.08,
-  'Others (Industrial Electronics, etc.)': 1.04,
-  'Household Appliances': 0.98,
-  'Toys and Sporting Goods': 1.0,
-};
-
 let seed = 42;
 function seededRandom() {
   seed = (seed * 16807) % 2147483647;
@@ -180,7 +127,7 @@ function generateTimeSeries(baseValue, growthRate, roundFn) {
   return series;
 }
 
-// ~USD Million total market in 2021 at “Americas” level; split across sub-regions
+// ~USD Million total market in 2021 at Americas level; split across U.S. and Mexico
 const americas2021 = 18500;
 const volumePerMillionUSD = 520;
 
@@ -210,13 +157,9 @@ function buildGeoData(isVolume) {
       const gr = regionGrowth * growthMult[ST_TECH][t] * (0.98 + seededRandom() * 0.05);
       out[geo][ST_TECH][t] = generateTimeSeries(geoBase * sh, gr, roundFn);
     }
-    for (const [ind, children] of Object.entries(endUse)) {
-      out[geo][ST_END][ind] = {};
-      const indGr = regionGrowth * growthMult[ST_END][ind] * (0.98 + seededRandom() * 0.04);
-      for (const [leaf, sh] of Object.entries(children)) {
-        const m = endUseLeafMult[leaf] || 1;
-        out[geo][ST_END][ind][leaf] = generateTimeSeries(geoBase * sh * 0.2, indGr * m, roundFn);
-      }
+    for (const [ind, sh] of Object.entries(endUseMain)) {
+      const gr = regionGrowth * growthMult[ST_END][ind] * (0.98 + seededRandom() * 0.04);
+      out[geo][ST_END][ind] = generateTimeSeries(geoBase * sh, gr, roundFn);
     }
   }
   return out;
@@ -238,19 +181,15 @@ function emptyNested(obj) {
 function buildSegmentation() {
   const sample = buildGeoData(false);
   const fromSample = {
-    [ST_RESIN]: emptyNested(sample[US_SUB[0]][ST_RESIN]),
-    [ST_FORM]: emptyNested(sample[US_SUB[0]][ST_FORM]),
-    [ST_TECH]: emptyNested(sample[US_SUB[0]][ST_TECH]),
-    [ST_END]: emptyNested(sample[US_SUB[0]][ST_END]),
+    [ST_RESIN]: emptyNested(sample['U.S.'][ST_RESIN]),
+    [ST_FORM]: emptyNested(sample['U.S.'][ST_FORM]),
+    [ST_TECH]: emptyNested(sample['U.S.'][ST_TECH]),
+    [ST_END]: emptyNested(sample['U.S.'][ST_END]),
   };
+  // Two top-level geographies, no "By Region" tree — flat geography picker (U.S. + Mexico only)
   return {
-    Global: {
-      'By Region': {
-        'U.S.': Object.fromEntries(US_SUB.map((s) => [s, {}])),
-        Mexico: Object.fromEntries(MX_SUB.map((s) => [s, {}])),
-      },
-      ...fromSample,
-    },
+    'U.S.': { ...fromSample },
+    Mexico: { ...fromSample },
   };
 }
 
@@ -268,5 +207,5 @@ fs.writeFileSync(path.join(outDir, 'volume.json'), JSON.stringify(volumeData, nu
 fs.writeFileSync(path.join(outDir, 'segmentation_analysis.json'), JSON.stringify(seg, null, 2));
 
 console.log('Wrote value.json, volume.json, segmentation_analysis.json');
-console.log('Top-level geographies:', Object.keys(valueData).length, ALL_GEO.length === Object.keys(valueData).length ? '(10 sub-regions)' : '');
+console.log('Top-level geographies:', Object.keys(valueData).length, ALL_GEO.length === Object.keys(valueData).length ? '(U.S. + Mexico)' : '');
 console.log('Sample geo keys:', Object.keys(valueData).slice(0, 3));

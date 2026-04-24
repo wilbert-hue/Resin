@@ -276,17 +276,23 @@ export function CompactFilterPanel() {
           className="w-full px-2 py-1 text-xs text-black border border-gray-300 rounded mt-1"
           size={3}
         >
-          {data.dimensions.geographies.global && data.dimensions.geographies.global.length > 0 && (
-            <option value={data.dimensions.geographies.global[0]}>{data.dimensions.geographies.global[0]}</option>
-          )}
-          {data.dimensions.geographies.regions.map(region => (
-            <optgroup key={region} label={region}>
-              <option value={region}>{region}</option>
-              {data.dimensions.geographies.countries[region]?.map(country => (
-                <option key={country} value={country}>  {country}</option>
+          {data.dimensions.geographies.regions.length > 0
+            ? data.dimensions.geographies.regions.map((region) => (
+                <optgroup key={region} label={region}>
+                  <option value={region}>{region}</option>
+                  {data.dimensions.geographies.countries[region]?.map((country) => (
+                    <option key={country} value={country}>
+                      {'  '}
+                      {country}
+                    </option>
+                  ))}
+                </optgroup>
+              ))
+            : (data.dimensions.geographies.all_geographies || []).map((geo) => (
+                <option key={geo} value={geo}>
+                  {geo}
+                </option>
               ))}
-            </optgroup>
-          ))}
         </select>
         <p className="text-xs text-black mt-0.5">
           {filters.geographies.length} selected

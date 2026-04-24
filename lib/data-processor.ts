@@ -1,16 +1,7 @@
 import type { DataRecord, FilterState, ChartDataPoint, HeatmapCell, ComparisonTableRow } from './types'
 
-/** Parent → sub-regions (fallback; loaded data usually supplies `dimensions.geographies.countries`) */
-const DEFAULT_GEOGRAPHY_HIERARCHY: Record<string, string[]> = {
-  'U.S.': ['Northeast', 'Midwest', 'South', 'West', 'Southeast'],
-  'Mexico': [
-    'Northern Mexico',
-    'Central Mexico',
-    'Western Mexico',
-    'Southern Mexico',
-    'Southeast Mexico',
-  ],
-}
+/** Parent → child geographies (fallback; empty when the dataset is country-only, e.g. U.S. + Mexico). */
+const DEFAULT_GEOGRAPHY_HIERARCHY: Record<string, string[]> = {}
 
 function resolveGeographyHierarchy(
   geographyCountries?: Record<string, string[]>

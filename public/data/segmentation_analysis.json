@@ -1,21 +1,5 @@
 {
-  "Global": {
-    "By Region": {
-      "U.S.": {
-        "Northeast": {},
-        "Midwest": {},
-        "South": {},
-        "West": {},
-        "Southeast": {}
-      },
-      "Mexico": {
-        "Northern Mexico": {},
-        "Central Mexico": {},
-        "Western Mexico": {},
-        "Southern Mexico": {},
-        "Southeast Mexico": {}
-      }
-    },
+  "U.S.": {
     "By Resin/Thermoplastic Compound Types": {
       "Polyethylene (PE)": {},
       "Polypropylene (PP)": {},
@@ -47,31 +31,50 @@
       "Others": {}
     },
     "End-Use Industries": {
-      "Packaging": {
-        "Flexible Packaging": {},
-        "Rigid Packaging": {},
-        "Food & Beverage Packaging": {},
-        "Others (Industrial Packaging, etc.)": {}
-      },
-      "Automotive": {
-        "Exterior Components": {},
-        "Interior Components": {},
-        "Others (Under-the-Hood Components, etc.)": {}
-      },
-      "Construction": {
-        "Building Materials": {},
-        "Flooring and Roofing": {},
-        "Others (Window Profiles and Doors, etc.)": {}
-      },
-      "Electronics": {
-        "Consumer Electronics": {},
-        "Automotive Electronics": {},
-        "Others (Industrial Electronics, etc.)": {}
-      },
-      "Consumer Goods": {
-        "Household Appliances": {},
-        "Toys and Sporting Goods": {}
-      }
+      "Packaging": {},
+      "Automotive": {},
+      "Construction": {},
+      "Electronics": {},
+      "Consumer Goods": {}
+    }
+  },
+  "Mexico": {
+    "By Resin/Thermoplastic Compound Types": {
+      "Polyethylene (PE)": {},
+      "Polypropylene (PP)": {},
+      "Polyvinyl Chloride (PVC)": {},
+      "Polyethylene Terephthalate (PET)": {},
+      "Acrylonitrile Butadiene Styrene (ABS)": {},
+      "Polyamide (PA)": {},
+      "Polyphenylene Sulfide (PPS)": {},
+      "Polyoxymethylene (POM)": {},
+      "Polyether Ether Ketone (PEEK)": {},
+      "Polybutylene Terephthalate (PBT)": {},
+      "Polycarbonate (PC)": {},
+      "Polycarbonate-ABS (PC-ABS)": {},
+      "Other Engineered Compounds": {}
+    },
+    "By Form": {
+      "Liquid": {},
+      "Solid": {}
+    },
+    "By Technology": {
+      "Injection Molding": {},
+      "Blow Molding": {},
+      "Extrusion": {},
+      "Compression Molding": {},
+      "Rotational Molding": {},
+      "Thermoforming": {},
+      "3D Printing": {},
+      "Foam Molding": {},
+      "Others": {}
+    },
+    "End-Use Industries": {
+      "Packaging": {},
+      "Automotive": {},
+      "Construction": {},
+      "Electronics": {},
+      "Consumer Goods": {}
     }
   }
 }

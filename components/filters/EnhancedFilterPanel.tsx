@@ -15,6 +15,14 @@ interface SelectedSegmentItem {
   id: string
 }
 
+/** No nested sub-segments: only empty child lists (API still uses hierarchical dimension shape). */
+function isEffectivelyFlatSegmentHierarchy(h: Record<string, string[]> | undefined): boolean {
+  if (!h || Object.keys(h).length === 0) return true
+  return Object.values(h).every(
+    (children) => !Array.isArray(children) || children.length === 0
+  )
+}
+
 export function EnhancedFilterPanel() {
   const { data, filters, updateFilters } = useDashboardStore()
   const [selectedSegmentType, setSelectedSegmentType] = useState<string>(
@@ -390,12 +398,12 @@ export function EnhancedFilterPanel() {
           <label className="block text-xs text-black mb-1">
             Step 2: Select Segment from {selectedSegmentType}
           </label>
-          {Object.keys(hierarchy).length === 0 && availableSegments.length === 0 ? (
+          {isEffectivelyFlatSegmentHierarchy(hierarchy) && availableSegments.length === 0 ? (
             <div className="w-full px-3 py-2 border border-yellow-300 rounded-md mb-2 bg-yellow-50 text-yellow-800 text-sm">
               ⚠️ No segments available for this segment type. Please check your data structure.
             </div>
-          ) : Object.keys(hierarchy).length === 0 && availableSegments.length > 0 ? (
-            // Fallback for flat segments (no hierarchy)
+          ) : isEffectivelyFlatSegmentHierarchy(hierarchy) && availableSegments.length > 0 ? (
+            // Flat segments (no nested sub-segments) or "main-only" trees with empty child lists
             <>
               <select
                 value={currentSegmentSelection}
