@@ -1,16 +1,21 @@
 {
   "U.S.": {
     "By Resin/Thermoplastic Compound Types": {
-      "Polyethylene (PE)": {},
+      "Polyethylene (PE)": {
+        "MLDPE": {},
+        "LLDPE": {},
+        "HDPE": {},
+        "LDPE": {}
+      },
+      "High Impact Polystyrene (HIPS)": {},
+      "General Purpose Polystyrene (GPPS)": {},
+      "Expanded Polystyrene (EPS)": {},
       "Polypropylene (PP)": {},
-      "Polyvinyl Chloride (PVC)": {},
-      "Polyethylene Terephthalate (PET)": {},
+      "Polyvinyl Chloride (PVC)": {
+        "PVC Resin": {},
+        "PVC Compound": {}
+      },
       "Acrylonitrile Butadiene Styrene (ABS)": {},
-      "Polyamide (PA)": {},
-      "Polyphenylene Sulfide (PPS)": {},
-      "Polyoxymethylene (POM)": {},
-      "Polyether Ether Ketone (PEEK)": {},
-      "Polybutylene Terephthalate (PBT)": {},
       "Polycarbonate (PC)": {},
       "Polycarbonate-ABS (PC-ABS)": {},
       "Other Engineered Compounds": {}
@@ -29,6 +34,10 @@
       "3D Printing": {},
       "Foam Molding": {},
       "Others": {}
+    },
+    "By Distribution Channels": {
+      "Direct Sales": {},
+      "Indirect (Distribution Channels, etc.)": {}
     },
     "End-Use Industries": {
       "Packaging": {},
@@ -40,16 +49,21 @@
   },
   "Mexico": {
     "By Resin/Thermoplastic Compound Types": {
-      "Polyethylene (PE)": {},
+      "Polyethylene (PE)": {
+        "MLDPE": {},
+        "LLDPE": {},
+        "HDPE": {},
+        "LDPE": {}
+      },
+      "High Impact Polystyrene (HIPS)": {},
+      "General Purpose Polystyrene (GPPS)": {},
+      "Expanded Polystyrene (EPS)": {},
       "Polypropylene (PP)": {},
-      "Polyvinyl Chloride (PVC)": {},
-      "Polyethylene Terephthalate (PET)": {},
+      "Polyvinyl Chloride (PVC)": {
+        "PVC Resin": {},
+        "PVC Compound": {}
+      },
       "Acrylonitrile Butadiene Styrene (ABS)": {},
-      "Polyamide (PA)": {},
-      "Polyphenylene Sulfide (PPS)": {},
-      "Polyoxymethylene (POM)": {},
-      "Polyether Ether Ketone (PEEK)": {},
-      "Polybutylene Terephthalate (PBT)": {},
       "Polycarbonate (PC)": {},
       "Polycarbonate-ABS (PC-ABS)": {},
       "Other Engineered Compounds": {}
@@ -68,6 +82,58 @@
       "3D Printing": {},
       "Foam Molding": {},
       "Others": {}
+    },
+    "By Distribution Channels": {
+      "Direct Sales": {},
+      "Indirect (Distribution Channels, etc.)": {}
+    },
+    "End-Use Industries": {
+      "Packaging": {},
+      "Automotive": {},
+      "Construction": {},
+      "Electronics": {},
+      "Consumer Goods": {}
+    }
+  },
+  "Brazil": {
+    "By Resin/Thermoplastic Compound Types": {
+      "Polyethylene (PE)": {
+        "MLDPE": {},
+        "LLDPE": {},
+        "HDPE": {},
+        "LDPE": {}
+      },
+      "High Impact Polystyrene (HIPS)": {},
+      "General Purpose Polystyrene (GPPS)": {},
+      "Expanded Polystyrene (EPS)": {},
+      "Polypropylene (PP)": {},
+      "Polyvinyl Chloride (PVC)": {
+        "PVC Resin": {},
+        "PVC Compound": {}
+      },
+      "Acrylonitrile Butadiene Styrene (ABS)": {},
+      "Polycarbonate (PC)": {},
+      "Polycarbonate-ABS (PC-ABS)": {},
+      "Other Engineered Compounds": {}
+    },
+    "By Form": {
+      "Liquid": {},
+      "Solid": {}
+    },
+    "By Technology": {
+      "Injection Molding": {},
+      "Blow Molding": {},
+      "Extrusion": {},
+      "Compression Molding": {},
+      "Rotational Molding": {},
+      "Thermoforming": {},
+      "3D Printing": {},
+      "Foam Molding": {},
+      "Others": {}
+    },
+    "By Distribution Channels": {
+      "Direct Sales": {},
+      "Indirect (Distribution Channels, etc.)": {}
     },
     "End-Use Industries": {
       "Packaging": {},

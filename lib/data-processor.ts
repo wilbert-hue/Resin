@@ -242,6 +242,15 @@ export function filterData(
     }
   }
 
+  // Parent segment names that have an actual aggregated row in the dataset (year data at parent node).
+  // If no such row exists, selecting a parent must still include leaf descendants (e.g. PE → MLDPE…).
+  const aggregatedSegmentNamesForType = new Set<string>()
+  for (const r of data) {
+    if (r.segment_type === filters.segmentType && r.is_aggregated === true && r.segment) {
+      aggregatedSegmentNamesForType.add(r.segment)
+    }
+  }
+
   const filtered = data.filter((record) => {
     // 1. Geography filter - enhanced to handle parent-child relationships
     // In geography mode, when a parent geography is selected (e.g., "North America"),
@@ -404,25 +413,32 @@ export function filterData(
               }
             }
           } else {
-            // Check if this leaf's parent is one of the explicitly selected segments
-            // If so, the aggregated parent record is already included - skip the leaf to avoid double-counting
+            // Leaf record: include if it matches a selected segment or sits under a selected parent
             const hierarchy = record.segment_hierarchy
-            const parentIsSelected = selectedLevel1Segments.some(selectedSeg =>
-              hierarchy.level_1 === selectedSeg
+            const parentIsSelected = selectedLevel1Segments.some(
+              (selectedSeg) => hierarchy.level_1 === selectedSeg
             )
-
-            if (parentIsSelected && !isExplicitlySelectedSegment) {
-              // Parent aggregated record is already included - exclude this leaf child
-              // BUT if this leaf IS the explicitly selected segment (flat segment with no children),
-              // include it because there's no separate aggregated parent record for flat segments
+            // Only suppress leaves when a real aggregated parent row exists for that parent name
+            if (
+              parentIsSelected &&
+              !isExplicitlySelectedSegment &&
+              selectedLevel1Segments.some(
+                (s) =>
+                  hierarchy.level_1 === s &&
+                  aggregatedSegmentNamesForType.has(s)
+              )
+            ) {
               return false
             }
 
-            // For other cases, check if this leaf belongs to any selected segment
-            const belongsToSelectedSegment = selectedLevel1Segments.some(selectedSeg =>
-              hierarchy.level_1 === selectedSeg ||
-              hierarchy.level_2 === selectedSeg ||
-              record.segment === selectedSeg
+            const belongsToSelectedSegment = selectedLevel1Segments.some(
+              (selectedSeg) =>
+                hierarchy.level_1 === selectedSeg ||
+                hierarchy.level_2 === selectedSeg ||
+                hierarchy.level_3 === selectedSeg ||
+                hierarchy.level_4 === selectedSeg ||
+                (hierarchy.level_5 && hierarchy.level_5 === selectedSeg) ||
+                record.segment === selectedSeg
             )
 
             if (!belongsToSelectedSegment) {
